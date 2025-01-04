@@ -49,6 +49,10 @@ add_executable(space_mouse_node src/space_mouse_node.cpp
         include/robot_teleoperation/space_mouse_node.hpp
 )
 
+add_executable(demo_node src/demo_movment.cpp
+        include/robot_teleoperation/demo_movment.hpp
+)
+
 ament_target_dependencies(xbox_controller
         rclcpp
         geometry_msgs
@@ -74,6 +78,18 @@ ament_target_dependencies(space_mouse_node
         moveit_servo
         control_msgs
 
+)
+
+ament_target_dependencies(demo_node
+        rclcpp
+        geometry_msgs
+        robot_teleoperation_interface
+        sensor_msgs
+        moveit_core
+        moveit_ros_planning_interface
+        moveit_ros_planning
+        moveit_servo
+        control_msgs
 )
 
 ament_target_dependencies(teleop_controller_node
@@ -109,6 +125,12 @@ target_include_directories(xbox_controller PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>)
 
+target_include_directories(demo_node PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>)
+
+target_compile_features(demo_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+
 target_compile_features(space_mouse_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 target_compile_features(teleop_controller_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 target_compile_features(direct_control_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
@@ -126,6 +148,8 @@ install(TARGETS xbox_controller
 install(TARGETS space_mouse_node
         DESTINATION lib/${PROJECT_NAME})
 
+install(TARGETS demo_node
+        DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch
         DESTINATION share/${PROJECT_NAME}/

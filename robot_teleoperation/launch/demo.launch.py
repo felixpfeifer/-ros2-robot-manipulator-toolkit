@@ -23,8 +23,16 @@ def generate_launch_description():
         output="screen",
     )
 
+    demo_node = Node(
+        package="robot_teleoperation",
+        executable="demo_node",
+        name="demo_node",
+        output="screen",
+    )
+
     return LaunchDescription(
         [
-            teleop_node
+            teleop_node,
+            demo_node
         ]
     )

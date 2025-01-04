@@ -156,7 +156,7 @@ bool xbox_controller::convertJoyToCmd(const std::vector<float> &axes, const std:
 
     // Button X is to select the Link_6_1
     if (buttons[X] && debouncing_states["X"] == 0) {
-
+        
     } else if (buttons[X] == 0 && debouncing_states["X"] == 1) {
         debouncing_states["X"] = 0;
     }
